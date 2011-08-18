@@ -64,7 +64,7 @@ int main() {
 	
 	
 	// create a collection of dynamic lists to manipulate
-	DynList *lists[10] = {0};
+	DynList *lists[10] = {NULL};
 	
 	// get input command
 	cout << "Command: ";
@@ -80,6 +80,10 @@ int main() {
 				cout << "Enter name of list (l0-l9): ";
 				int name;
 				if ( readName(name) ) {
+					if ( lists[name] != NULL ) {
+						delete lists[name];
+						lists[name] = NULL;
+					}
 					lists[name] = new DynList;
 				}
 				break;
@@ -90,14 +94,14 @@ int main() {
 				cout << "Enter name of list (l0-l9): ";
 				int name;
 				if ( readName(name) ) {
-					if (lists[name] == 0) {
+					if (lists[name] == NULL) {
 						cout << "List l" << name << " is not yet defined." << endl;
 						break;
 					}
 					cout << "Enter index into list l" << name << ": ";
 					int index;
 					cin >> index;
-					if (0 > index ) {
+					if ( 0 > index ) {
 						cout << "Invalid index." << endl;
 						break;
 					}
@@ -222,4 +226,8 @@ int main() {
 				
 
 	} // while cin OK
+	
+	for (int i = 0; i < 10; i++) {
+		delete lists[i];
+	}
 }
