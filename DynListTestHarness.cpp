@@ -80,10 +80,7 @@ int main() {
 				cout << "Enter name of list (l0-l9): ";
 				int name;
 				if ( readName(name) ) {
-					if ( lists[name] != NULL ) {
-						delete lists[name];
-						lists[name] = NULL;
-					}
+					delete lists[name];
 					lists[name] = new DynList;
 				}
 				break;
